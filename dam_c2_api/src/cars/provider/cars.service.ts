@@ -14,7 +14,7 @@ export class CarsService {
 
   async getAll() {
     return await this.carsRepository.find({
-      where: { deleted_at: null },
+      where: { available: true },
     });
   }
 
@@ -31,12 +31,18 @@ export class CarsService {
   }
 
   async update(vin: string, data: Partial<CarsDTO>) {
-    await this.carsRepository.update({ vin }, data);
-    return this.carsRepository;
+    await this.carsRepository.update(
+      { vin },
+      { ...data, updated_at: new Date() },
+    );
+    return { updated: true };
   }
 
   async delete(vin: string) {
-    await this.carsRepository.update({ vin }, { deleted_at: new Date() });
+    await this.carsRepository.update(
+      { vin },
+      { available: false, deleted_at: new Date() },
+    );
     return { deleted: true };
   }
 }
