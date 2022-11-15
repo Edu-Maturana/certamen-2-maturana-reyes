@@ -1,4 +1,4 @@
-export interface ToursDTO {
+export class ToursDTO {
   id: number;
   name: string;
   city: string;

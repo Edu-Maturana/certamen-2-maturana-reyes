@@ -16,9 +16,9 @@ export class CarsService {
     return await this.carsRepository.find();
   }
 
-  async getOne(id: number) {
+  async getOne(vin: string) {
     return await this.carsRepository.findOne({
-      where: { vin: id },
+      where: { vin },
     });
   }
 
@@ -28,13 +28,13 @@ export class CarsService {
     return tour;
   }
 
-  async update(id: number, data: Partial<CarsDTO>) {
-    await this.carsRepository.update({ vin: id }, data);
+  async update(vin: string, data: Partial<CarsDTO>) {
+    await this.carsRepository.update({ vin }, data);
     return this.carsRepository;
   }
 
-  async delete(id: number) {
-    await this.carsRepository.delete({ vin: id });
+  async delete(vin: string) {
+    await this.carsRepository.delete({ vin });
     return { deleted: true };
   }
 }

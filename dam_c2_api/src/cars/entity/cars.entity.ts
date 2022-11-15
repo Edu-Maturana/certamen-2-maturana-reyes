@@ -1,9 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn } from 'typeorm';
 
 @Entity('cars')
 export class CarsEntity {
-  @PrimaryGeneratedColumn()
-  vin: number;
+  @PrimaryColumn()
+  vin: string;
 
   @Column()
   brand: string;
@@ -12,7 +12,7 @@ export class CarsEntity {
   model: string;
 
   @Column()
-  year: string;
+  year: number;
 
   @Column()
   price: number;
