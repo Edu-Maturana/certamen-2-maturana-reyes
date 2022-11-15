@@ -19,7 +19,7 @@ import { CarsModule } from './cars/cars.module';
         database: process.env.DB_NAME,
         synchronize: false,
         autoLoadEntities: true,
-        migrationsRun: false,
+        migrationsRun: true,
       }),
     }),
     ToursModule,
