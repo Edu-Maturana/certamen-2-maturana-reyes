@@ -31,7 +31,10 @@ export class CarsService {
   }
 
   async update(vin: string, data: Partial<CarsDTO>) {
-    await this.carsRepository.update({ vin }, data);
+    await this.carsRepository.update(
+      { vin },
+      { ...data, updated_at: new Date() },
+    );
     return this.carsRepository;
   }
 
