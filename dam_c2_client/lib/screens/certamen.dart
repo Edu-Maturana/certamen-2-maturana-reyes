@@ -64,7 +64,27 @@ class _CertamenAutosPageState extends State<CertamenAutosPage> {
                   }
                 },
               ),
-            )
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/Add');
+                  },
+                  child: Text('Agregar'),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/Delete');
+                  },
+                  child: Text('Eliminar'),
+                ),
+              ],
+            ),
           ],
         ),
       ),
