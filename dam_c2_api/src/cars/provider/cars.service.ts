@@ -13,7 +13,9 @@ export class CarsService {
   ) {}
 
   async getAll() {
-    return await this.carsRepository.find();
+    return await this.carsRepository.find({
+      where: { deleted_at: null },
+    });
   }
 
   async getOne(vin: string) {
