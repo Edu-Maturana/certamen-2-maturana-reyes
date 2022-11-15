@@ -23,14 +23,14 @@ export class CarsService {
   }
 
   async create(data: CarsDTO) {
-    const tour = await this.carsRepository.create(data);
+    const tour = this.carsRepository.create(data);
     await this.carsRepository.save(tour);
     return tour;
   }
 
   async update(id: number, data: Partial<CarsDTO>) {
     await this.carsRepository.update({ vin: id }, data);
-    return await this.carsRepository;
+    return this.carsRepository;
   }
 
   async delete(id: number) {

@@ -23,14 +23,14 @@ export class ToursService {
   }
 
   async create(data: ToursDTO) {
-    const tour = await this.toursRepository.create(data);
+    const tour = this.toursRepository.create(data);
     await this.toursRepository.save(tour);
     return tour;
   }
 
   async update(id: number, data: Partial<ToursDTO>) {
     await this.toursRepository.update({ id }, data);
-    return await this.toursRepository;
+    return this.toursRepository;
   }
 
   async delete(id: number) {
