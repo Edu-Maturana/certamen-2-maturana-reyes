@@ -34,7 +34,7 @@ export class CarsService {
   }
 
   async delete(vin: string) {
-    await this.carsRepository.delete({ vin });
+    await this.carsRepository.update({ vin }, { deleted_at: new Date() });
     return { deleted: true };
   }
 }
