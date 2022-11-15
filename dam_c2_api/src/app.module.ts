@@ -17,7 +17,7 @@ import { CarsModule } from './cars/cars.module';
         username: process.env.DB_USER,
         password: process.env.DB_PASS,
         database: process.env.DB_NAME,
-        synchronize: false,
+        synchronize: true,
         autoLoadEntities: true,
         migrationsRun: true,
       }),

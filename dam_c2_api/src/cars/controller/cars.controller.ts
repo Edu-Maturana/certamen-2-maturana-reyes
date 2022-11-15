@@ -7,6 +7,7 @@ import {
   Body,
   Param,
   HttpStatus,
+  ParseIntPipe,
 } from '@nestjs/common';
 
 import { CarsService } from '../provider/cars.service';
@@ -26,9 +27,9 @@ export class CarsController {
     };
   }
 
-  @Get(':id')
-  async getOne(@Param('id') id: number) {
-    const car = await this.carsService.getOne(id);
+  @Get(':vin')
+  async getOne(@Param('vin') vin: string) {
+    const car = await this.carsService.getOne(vin);
 
     return {
       statusCode: HttpStatus.OK,
@@ -44,19 +45,19 @@ export class CarsController {
     };
   }
 
-  @Put(':id')
-  async update(@Param('id') id: number, @Body() data: Partial<CarsDTO>) {
+  @Put(':vin')
+  async update(@Param('vin') vin: string, @Body() data: Partial<CarsDTO>) {
     return {
       statusCode: HttpStatus.OK,
-      data: await this.carsService.update(id, data),
+      data: await this.carsService.update(vin, data),
     };
   }
 
-  @Delete(':id')
-  async delete(@Param('id') id: number) {
+  @Delete(':vin')
+  async delete(@Param('vin') vin: string) {
     return {
       statusCode: HttpStatus.OK,
-      data: await this.carsService.delete(id),
+      data: await this.carsService.delete(vin),
     };
   }
 }

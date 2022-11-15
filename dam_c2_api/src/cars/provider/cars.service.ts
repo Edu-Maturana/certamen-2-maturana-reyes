@@ -16,25 +16,25 @@ export class CarsService {
     return await this.carsRepository.find();
   }
 
-  async getOne(id: number) {
+  async getOne(vin: string) {
     return await this.carsRepository.findOne({
-      where: { vin: id },
+      where: { vin },
     });
   }
 
   async create(data: CarsDTO) {
-    const tour = await this.carsRepository.create(data);
+    const tour = this.carsRepository.create(data);
     await this.carsRepository.save(tour);
     return tour;
   }
 
-  async update(id: number, data: Partial<CarsDTO>) {
-    await this.carsRepository.update({ vin: id }, data);
-    return await this.carsRepository;
+  async update(vin: string, data: Partial<CarsDTO>) {
+    await this.carsRepository.update({ vin }, data);
+    return this.carsRepository;
   }
 
-  async delete(id: number) {
-    await this.carsRepository.delete({ vin: id });
+  async delete(vin: string) {
+    await this.carsRepository.delete({ vin });
     return { deleted: true };
   }
 }
