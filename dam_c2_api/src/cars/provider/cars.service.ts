@@ -35,7 +35,7 @@ export class CarsService {
       { vin },
       { ...data, updated_at: new Date() },
     );
-    return this.carsRepository;
+    return { updated: true };
   }
 
   async delete(vin: string) {
