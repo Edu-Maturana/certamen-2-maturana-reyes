@@ -15,3 +15,17 @@ class TourProvider {
     }
   }
 }
+
+class ProviderAutos {
+  final apiURL = 'http://10.0.2.2:3000/cars';
+
+  Future getAutos() async {
+    var url = Uri.parse(apiURL);
+    var respuesta = await http.get(url);
+    if (respuesta.statusCode == 200) {
+      return json.decode(respuesta.body);
+    } else {
+      return [];
+    }
+  }
+}

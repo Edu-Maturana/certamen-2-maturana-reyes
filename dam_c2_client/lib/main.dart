@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/Tours': (context) => TabsTourPage(),
-        '/certamen': (context) => certamen(),
+        '/certamen': (context) => CertamenAutosPage(),
       },
     );
   }
