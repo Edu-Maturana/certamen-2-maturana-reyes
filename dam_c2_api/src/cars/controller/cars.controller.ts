@@ -18,17 +18,21 @@ export class CarsController {
 
   @Get()
   async getAll() {
+    const cars = await this.carsService.getAll();
+
     return {
       statusCode: HttpStatus.OK,
-      data: await this.carsService.getAll(),
+      data: cars,
     };
   }
 
   @Get(':id')
   async getOne(@Param('id') id: number) {
+    const car = await this.carsService.getOne(id);
+
     return {
       statusCode: HttpStatus.OK,
-      data: await this.carsService.getOne(id),
+      data: car,
     };
   }
 
