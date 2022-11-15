@@ -127,7 +127,7 @@ class _AddAutoState extends State<AddAuto> {
                                   setState(() {
                                     widget._isApiProcess = false;
                                   });
-                                  if (respuesta.statusCode == 200) {
+                                  if (respuesta.statusCode == 201) {
                                     showSnackBar("Auto agregado");
                                     Navigator.pop(context, true);
                                   } else {
