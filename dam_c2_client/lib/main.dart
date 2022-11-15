@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_project/screens/ProductsScreen.dart';
+import 'package:mobile_project/screens/certamen.dart';
 import 'package:mobile_project/screens/home_screen.dart';
 
 void main() => runApp(MyApp());
@@ -16,6 +18,11 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Color(0xFFF3F5F7),
       ),
       home: HomeScreen(),
+      initialRoute: '/',
+      routes: {
+        '/Tours': (context) => TabsTourPage(),
+        '/certamen': (context) => certamen(),
+      },
     );
   }
 }
