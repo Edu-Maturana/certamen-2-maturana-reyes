@@ -23,6 +23,7 @@ class _TabsTourPageState extends State<TabsTourPage> {
                 'Lista de Tours',
                 style: TextStyle(fontSize: 20),
               ),
+              backgroundColor: Colors.red,
             ),
             Expanded(
               child: FutureBuilder(

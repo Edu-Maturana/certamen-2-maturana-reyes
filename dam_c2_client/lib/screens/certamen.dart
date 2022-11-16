@@ -25,6 +25,7 @@ class _CertamenAutosPageState extends State<CertamenAutosPage> {
                   Navigator.pop(context);
                 },
               ),
+              backgroundColor: Colors.red,
               title: Text(
                 'C2 DAM020-CLIENTE',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -72,6 +73,13 @@ class _CertamenAutosPageState extends State<CertamenAutosPage> {
                   onPressed: () {
                     Navigator.pushNamed(context, '/Add');
                   },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.red,
+                    onPrimary: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(32.0),
+                    ),
+                  ),
                   child: Text('Agregar'),
                 ),
                 SizedBox(
@@ -81,6 +89,13 @@ class _CertamenAutosPageState extends State<CertamenAutosPage> {
                   onPressed: () {
                     Navigator.pushNamed(context, '/Delete');
                   },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.red,
+                    onPrimary: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(32.0),
+                    ),
+                  ),
                   child: Text('Eliminar'),
                 ),
               ],

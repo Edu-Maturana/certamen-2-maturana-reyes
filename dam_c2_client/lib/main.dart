@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Viajes al Sur',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Color(0xFF3EBACE),
+        primaryColor: Color.fromARGB(255, 176, 18, 0),
         accentColor: Color(0xFFD8ECF1),
         scaffoldBackgroundColor: Color(0xFFF3F5F7),
       ),
