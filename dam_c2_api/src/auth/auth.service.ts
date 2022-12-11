@@ -1,4 +1,3 @@
-import { AuthConfig } from '../auth.config';
 import { Inject, Injectable } from '@nestjs/common';
 import {
   AuthenticationDetails,
@@ -6,18 +5,20 @@ import {
   CognitoUserPool,
   CognitoUserAttribute,
 } from 'amazon-cognito-identity-js';
-
 @Injectable()
 export class AuthService {
   private userPool: CognitoUserPool;
   private sessionUserAttributes: {};
-  constructor(
-    @Inject('AuthConfig')
-    private readonly authConfig: AuthConfig,
-  ) {
+
+  private userPoolId: string = process.env.COGNITO_USER_POOL_ID;
+  private clientId: string = process.env.COGNITO_CLIENT_ID;
+  private region: string = process.env.COGNITO_REGION;
+  private authority = `https://cognito-idp.${process.env.COGNITO_REGION}.amazonaws.com/${process.env.COGNITO_USER_POOL_ID}`;
+
+  constructor() {
     this.userPool = new CognitoUserPool({
-      UserPoolId: this.authConfig.userPoolId,
-      ClientId: this.authConfig.clientId,
+      UserPoolId: this.userPoolId,
+      ClientId: this.clientId,
     });
   }
 

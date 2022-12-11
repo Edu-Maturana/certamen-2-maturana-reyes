@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
+    AuthModule,
     ConfigModule.forRoot(),
     TypeOrmModule.forRootAsync({
       useFactory: () => ({
@@ -25,7 +26,6 @@ import { AuthModule } from './auth/auth.module';
     }),
     ToursModule,
     CarsModule,
-    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

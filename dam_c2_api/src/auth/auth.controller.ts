@@ -1,5 +1,5 @@
 import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
-import { AuthService } from '../provider/auth.service';
+import { AuthService } from './auth.service';
 
 @Controller('auth')
 export class AuthController {
