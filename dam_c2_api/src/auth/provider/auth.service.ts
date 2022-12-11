@@ -8,13 +8,9 @@ import {
 @Injectable()
 export class AuthService {
   private userPool: CognitoUserPool;
-  private sessionUserAttributes: {};
 
   private userPoolId: string = process.env.COGNITO_USER_POOL_ID;
   private clientId: string = process.env.COGNITO_CLIENT_ID;
-  private region: string = process.env.COGNITO_REGION;
-  private authority = `https://cognito-idp.${process.env.COGNITO_REGION}.amazonaws.com/${process.env.COGNITO_USER_POOL_ID}`;
-
   constructor() {
     this.userPool = new CognitoUserPool({
       UserPoolId: this.userPoolId,
