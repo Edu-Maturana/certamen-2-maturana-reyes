@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_project/screens/ProductsScreen.dart';
 import 'package:mobile_project/screens/certamen.dart';
+import 'package:mobile_project/screens/addCar.dart';
 import 'package:mobile_project/screens/home_screen.dart';
+import 'package:mobile_project/screens/deleteCar.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Viajes al Sur',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Color(0xFF3EBACE),
+        primaryColor: Color.fromARGB(255, 176, 18, 0),
         accentColor: Color(0xFFD8ECF1),
         scaffoldBackgroundColor: Color(0xFFF3F5F7),
       ),
@@ -21,7 +23,9 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/Tours': (context) => TabsTourPage(),
-        '/certamen': (context) => certamen(),
+        '/certamen': (context) => CertamenAutosPage(),
+        '/Add': (context) => AddAuto(),
+        '/Delete': (context) => DeleteAuto(),
       },
     );
   }

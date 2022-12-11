@@ -5,9 +5,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ToursModule } from './tours/tours.module';
 import { CarsModule } from './cars/cars.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
+    AuthModule,
     ConfigModule.forRoot(),
     TypeOrmModule.forRootAsync({
       useFactory: () => ({
