@@ -1,7 +1,7 @@
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
-import { AuthService } from './auth.service';
+import { AuthService } from './provider/auth.service';
 import { passportJwtSecret } from 'jwks-rsa';
 
 const clientId: string = process.env.COGNITO_CLIENT_ID;

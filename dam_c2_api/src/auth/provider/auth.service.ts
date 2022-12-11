@@ -29,16 +29,16 @@ export class AuthService {
   }) {
     const { name, email, password } = registerRequest;
     return new Promise((resolve, reject) => {
-      return this.userPool.signUp(
+      this.userPool.signUp(
         name,
         password,
         [new CognitoUserAttribute({ Name: 'email', Value: email })],
         null,
         (err, result) => {
-          if (!result) {
+          if (err) {
             reject(err);
           } else {
-            resolve(result.user);
+            resolve(result);
           }
         },
       );
