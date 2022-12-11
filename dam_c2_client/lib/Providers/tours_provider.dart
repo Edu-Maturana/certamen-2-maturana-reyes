@@ -15,22 +15,8 @@ class TourProvider {
       return [];
     }
   }
-}
 
-class ProviderAutos {
-  final apiURL = 'http://10.0.2.2:3000/cars';
-
-  Future getAutos() async {
-    var url = Uri.parse(apiURL);
-    var respuesta = await http.get(url);
-    if (respuesta.statusCode == 200) {
-      return json.decode(respuesta.body);
-    } else {
-      return [];
-    }
-  }
-
-  Future<http.Response> createAutos(Datos datos) async {
+  Future<http.Response> createTours(Datos datos) async {
     var url = Uri.parse(apiURL);
     var respuesta = await http.post(url,
         headers: {"content-type": "application/json"},
@@ -38,10 +24,19 @@ class ProviderAutos {
     return respuesta;
   }
 
-  Future<http.Response> deleteAutos(Post post) async {
-    //BORRAR UN AUTO POR VIN
-    var url = Uri.parse(apiURL + '/' + post.vin);
+  Future<http.Response> deleteTours(Post post) async {
+    var url = Uri.parse(apiURL + '/' + post.name);
     var respuesta = await http.delete(url);
     return respuesta;
+  }
+
+  Future<List<dynamic>> getToursName(String name) async {
+    var url = Uri.parse(apiURL + '/' + name);
+    var respuesta = await http.get(url);
+    if (respuesta.statusCode == 200) {
+      return json.decode(respuesta.body);
+    } else {
+      return [];
+    }
   }
 }

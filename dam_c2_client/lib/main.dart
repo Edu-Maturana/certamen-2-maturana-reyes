@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_project/screens/ProductsScreen.dart';
+import 'package:mobile_project/screens/buscarCar.dart';
 import 'package:mobile_project/screens/certamen.dart';
 import 'package:mobile_project/screens/addCar.dart';
 import 'package:mobile_project/screens/home_screen.dart';
@@ -23,9 +24,10 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/Tours': (context) => TabsTourPage(),
-        '/certamen': (context) => CertamenAutosPage(),
-        '/Add': (context) => AddAuto(),
-        '/Delete': (context) => DeleteAuto(),
+        '/certamen': (context) => CertamenTourPage(),
+        '/Add': (context) => AddTour(),
+        '/Delete': (context) => DeleteTour(),
+        '/Search': (context) => buscarTour(),
       },
     );
   }
