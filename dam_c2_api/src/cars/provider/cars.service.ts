@@ -18,7 +18,7 @@ export class CarsService {
     });
   }
 
-  async getOne(vin: string) {
+  async  getOne(vin: string) {
     return await this.carsRepository.findOne({
       where: { vin },
     });

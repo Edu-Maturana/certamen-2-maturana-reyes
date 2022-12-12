@@ -1,16 +1,15 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:mobile_project/Providers/tours_provider.dart';
+import 'package:mobile_project/screens/searchTour.dart';
 
-class CertamenAutosPage extends StatefulWidget {
-  //const TabsTourPage({super.key});
-
+class CertamenTourPage extends StatefulWidget {
   @override
-  State<CertamenAutosPage> createState() => _CertamenAutosPageState();
+  State<CertamenTourPage> createState() => _CertamenTourPageState();
 }
 
-class _CertamenAutosPageState extends State<CertamenAutosPage> {
-  ProviderAutos autos = ProviderAutos();
+class _CertamenTourPageState extends State<CertamenTourPage> {
+  TourProvider tour = TourProvider();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,13 +26,13 @@ class _CertamenAutosPageState extends State<CertamenAutosPage> {
               ),
               backgroundColor: Colors.red,
               title: Text(
-                'C2 DAM020-CLIENTE',
+                'C3 DAM020-CLIENTE',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
             Expanded(
               child: FutureBuilder(
-                future: autos.getAutos(),
+                future: tour.getTours(),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
                     return Center(
@@ -51,14 +50,17 @@ class _CertamenAutosPageState extends State<CertamenAutosPage> {
                       itemCount: snapshot.data['data'].length,
                       itemBuilder: (context, index) {
                         return ListTile(
-                          title: Text(snapshot.data['data'][index]['model'] +
+                          title: Text(snapshot.data['data'][index]['name'] +
                               ' - ' +
-                              snapshot.data['data'][index]['vin']),
-                          subtitle: Text(snapshot.data['data'][index]['brand'] +
-                              ' - ' +
-                              '${snapshot.data['data'][index]['year']}'),
+                              snapshot.data['data'][index]['city']),
+                          subtitle:
+                              Text(snapshot.data['data'][index]['description']),
                           trailing: Text(
-                              '${snapshot.data['data'][index]['price']} CLP'),
+                              '${snapshot.data['data'][index]['price']} CLP' +
+                                  ' - ' +
+                                  '${snapshot.data['data'][index]['schedule']}' +
+                                  ' - ' +
+                                  '${snapshot.data['data'][index]['rating']}'),
                         );
                       },
                     );
@@ -97,6 +99,25 @@ class _CertamenAutosPageState extends State<CertamenAutosPage> {
                     ),
                   ),
                   child: Text('Eliminar'),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return buscarTour(
+                        name: 'name',
+                        city: 'city',
+                        description: 'description',
+                        price: 0,
+                        shedule: 'shedule',
+                        rating: 0,
+                      );
+                    }));
+                  },
+                  child: Text('Buscar'),
                 ),
               ],
             ),

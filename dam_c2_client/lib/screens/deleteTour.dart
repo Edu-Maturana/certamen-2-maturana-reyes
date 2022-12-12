@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_project/modelos/carModel.dart';
+import 'package:mobile_project/modelos/tourModel.dart';
 import '../Providers/tours_provider.dart';
 
-class DeleteAuto extends StatefulWidget {
-  String vin;
+class DeleteTour extends StatefulWidget {
+  int id;
 
-  DeleteAuto({this.vin});
+  DeleteTour({this.id});
   @override
-  State<DeleteAuto> createState() => _DeleteAutoState();
+  State<DeleteTour> createState() => _DeleteTourState();
 }
 
-class _DeleteAutoState extends State<DeleteAuto> {
-  ProviderAutos autos = ProviderAutos();
-  TextEditingController _controllerVin = TextEditingController();
+class _DeleteTourState extends State<DeleteTour> {
+  TourProvider tour = TourProvider();
+  TextEditingController _controllerId = TextEditingController();
   @override
   void initState() {
-    _controllerVin.text = widget.vin;
+    _controllerId.text = widget.id == null ? "0" : toString();
     super.initState();
   }
 
@@ -23,7 +23,7 @@ class _DeleteAutoState extends State<DeleteAuto> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'ELIMINAR UN AUTO',
+          'ELIMINAR UN TOUR',
           style: TextStyle(fontSize: 20),
           textAlign: TextAlign.center,
         ),
@@ -40,8 +40,8 @@ class _DeleteAutoState extends State<DeleteAuto> {
           children: [
             TextFormField(
               keyboardType: TextInputType.text,
-              controller: _controllerVin,
-              decoration: InputDecoration(hintText: "Ingrese Patente"),
+              controller: _controllerId,
+              decoration: InputDecoration(hintText: "Ingrese el id del tour"),
             ),
             SizedBox(
               height: 40,
@@ -51,22 +51,24 @@ class _DeleteAutoState extends State<DeleteAuto> {
             ),
             ElevatedButton(
               onPressed: () {
-                String vin = _controllerVin.text.toString().trim();
-                if (vin.isEmpty) {
-                  showSnackBar("La patente es obligatoria");
+                int id = _controllerId.text.isEmpty
+                    ? null
+                    : int.parse(_controllerId.text);
+                if (id == null) {
+                  showSnackBar("El nombre es obligatorio");
                 } else {
                   setState(() {
                     Post post = Post(
-                      vin: vin,
+                      id: id,
                     );
-                    print(_controllerVin.text);
-                    autos.deleteAutos(post).then((respuesta) {
+                    print(_controllerId.text);
+                    tour.deleteTours(id).then((respuesta) {
                       setState(() {
                         if (respuesta.statusCode == 200) {
-                          showSnackBar("Auto eliminado");
+                          showSnackBar("Tour eliminado");
                           Navigator.pop(context, true);
                         } else {
-                          showSnackBar("Error al eliminar el auto");
+                          showSnackBar("Error al eliminar el tour");
                         }
                       });
                     });
