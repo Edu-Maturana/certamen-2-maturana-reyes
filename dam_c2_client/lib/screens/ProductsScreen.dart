@@ -8,9 +8,8 @@ class favoritePage extends StatefulWidget {
 }
 
 class _favoritePageState extends State<favoritePage> {
-  TourProvider tours = TourProvider();
   @override
   Widget build(BuildContext context) {
-    return null;
+    return Container();
   }
 }

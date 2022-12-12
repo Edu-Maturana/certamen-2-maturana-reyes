@@ -11,7 +11,6 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   List<IconData> _icons = [
     FontAwesomeIcons.powerOff,
-    FontAwesomeIcons.star,
     FontAwesomeIcons.map,
   ];
 
@@ -24,11 +23,9 @@ class _HomeScreenState extends State<HomeScreen> {
             if (_selectedIndex == 0) {
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) => LoginScreen()));
+            } else if (_selectedIndex == 1) {
+              Navigator.pushNamed(context, '/certamen');
             }
-          } else if (_selectedIndex == 1) {
-            Navigator.pushNamed(context, '/Tours');
-          } else if (_selectedIndex == 2) {
-            Navigator.pushNamed(context, '/certamen');
           }
         });
       },
@@ -78,11 +75,23 @@ class _HomeScreenState extends State<HomeScreen> {
               children: <Widget>[
                 _buildIcon(0),
                 _buildIcon(1),
-                _buildIcon(2),
               ],
             ),
-            SizedBox(height: 20.0),
-            //widgetDestino(),
+            SizedBox(height: 100.0),
+            Container(
+              height: 200.0,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(30.0),
+                child: Image(
+                  image: AssetImage('assets/images/LogoOficial.png'),
+                  fit: 3 == 0 ? BoxFit.cover : BoxFit.contain,
+                ),
+              ),
+            )
           ],
         ),
       ),
