@@ -16,27 +16,32 @@ class TourProvider {
     }
   }
 
-  Future<http.Response> createTours(Datos datos) async {
+  Future<http.Response> addTours(Datos tour) async {
     var url = Uri.parse(apiURL);
     var respuesta = await http.post(url,
-        headers: {"content-type": "application/json"},
-        body: datosToJson(datos));
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, dynamic>{
+          'name': tour.name,
+          'city': tour.city,
+          'description': tour.description,
+          'price': tour.price,
+          'shedule': tour.shedule,
+          'rating': tour.rating,
+        }));
     return respuesta;
   }
 
-  Future<http.Response> deleteTours(Post post) async {
-    var url = Uri.parse(apiURL + '/' + post.name);
+  Future<http.Response> deleteTours(int id) async {
+    var url = Uri.parse(apiURL + '/' + id.toString());
     var respuesta = await http.delete(url);
     return respuesta;
   }
 
-  Future<List<dynamic>> getToursName(String name) async {
-    var url = Uri.parse(apiURL + '/' + name);
+  Future getTour(int id) async {
+    var url = Uri.parse(apiURL + '/' + id.toString());
     var respuesta = await http.get(url);
-    if (respuesta.statusCode == 200) {
-      return json.decode(respuesta.body);
-    } else {
-      return [];
-    }
+    return respuesta;
   }
 }

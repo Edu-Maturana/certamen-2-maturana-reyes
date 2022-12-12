@@ -3,6 +3,7 @@ import 'package:mobile_project/modelos/tourModel.dart';
 import '../Providers/tours_provider.dart';
 
 class buscarTour extends StatefulWidget {
+  int id;
   String name;
   String city;
   String description;
@@ -12,7 +13,8 @@ class buscarTour extends StatefulWidget {
   bool _isApiProcess = true;
 
   buscarTour(
-      {this.name,
+      {this.id,
+      this.name,
       this.city,
       this.description,
       this.price,
@@ -24,10 +26,10 @@ class buscarTour extends StatefulWidget {
 
 class _buscarTourState extends State<buscarTour> {
   TourProvider tour = TourProvider();
-  TextEditingController _controllerName = TextEditingController();
+  TextEditingController _controllerId = TextEditingController();
   @override
   void initState() {
-    _controllerName.text = widget.name;
+    _controllerId.text = widget.id == null ? "0" : toString();
     super.initState();
   }
 
@@ -40,7 +42,7 @@ class _buscarTourState extends State<buscarTour> {
             Navigator.pop(context);
           },
         ),
-        title: Text('Consultar un producto'),
+        title: Text('Consultar un tour'),
         backgroundColor: Colors.deepPurpleAccent,
       ),
       body: Container(
@@ -48,14 +50,14 @@ class _buscarTourState extends State<buscarTour> {
         child: Column(
           children: <Widget>[
             Text(
-              'Ingresa el codigo del producto para consultar',
+              'Ingresa el id del tour para consultar',
               style: TextStyle(fontSize: 20),
             ),
             TextFormField(
-              controller: _controllerName,
+              controller: _controllerId,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                hintText: 'Ingresa el codigo',
+                hintText: 'Ingresa el id del tour',
               ),
             ),
             OutlinedButton(
@@ -65,21 +67,23 @@ class _buscarTourState extends State<buscarTour> {
                   primary: Colors.white,
                   backgroundColor: Colors.blue),
               onPressed: () {
-                String name = _controllerName.text.toString().trim();
-                if (name.isEmpty) {
-                  showSnackbarMessage("El nombre es requerido");
+                int id = _controllerId.text.isEmpty
+                    ? null
+                    : int.parse(_controllerId.text);
+                if (id == null) {
+                  showSnackbarMessage("El id es requerido");
                 } else {
                   setState(() {
                     widget._isApiProcess = true;
                     Post post = Post(
-                      name: name,
+                      id: id,
                     );
 
-                    if (post == widget.name) {
+                    if (widget.id == post.id) {
                       showSnackbarMessage("El tour existe");
                       Expanded(
                         child: FutureBuilder<dynamic>(
-                          future: tour.getToursName(_controllerName.text),
+                          future: tour.getTour(id),
                           builder: ((context, snapshot) {
                             if (!snapshot.hasData) {
                               return Center(

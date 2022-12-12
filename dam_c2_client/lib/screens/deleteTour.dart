@@ -3,19 +3,19 @@ import 'package:mobile_project/modelos/tourModel.dart';
 import '../Providers/tours_provider.dart';
 
 class DeleteTour extends StatefulWidget {
-  String name;
+  int id;
 
-  DeleteTour({this.name});
+  DeleteTour({this.id});
   @override
   State<DeleteTour> createState() => _DeleteTourState();
 }
 
 class _DeleteTourState extends State<DeleteTour> {
   TourProvider tour = TourProvider();
-  TextEditingController _controllerName = TextEditingController();
+  TextEditingController _controllerId = TextEditingController();
   @override
   void initState() {
-    _controllerName.text = widget.name;
+    _controllerId.text = widget.id == null ? "0" : toString();
     super.initState();
   }
 
@@ -40,8 +40,8 @@ class _DeleteTourState extends State<DeleteTour> {
           children: [
             TextFormField(
               keyboardType: TextInputType.text,
-              controller: _controllerName,
-              decoration: InputDecoration(hintText: "Ingrese nombre del tour"),
+              controller: _controllerId,
+              decoration: InputDecoration(hintText: "Ingrese el id del tour"),
             ),
             SizedBox(
               height: 40,
@@ -51,16 +51,18 @@ class _DeleteTourState extends State<DeleteTour> {
             ),
             ElevatedButton(
               onPressed: () {
-                String name = _controllerName.text.toString().trim();
-                if (name.isEmpty) {
+                int id = _controllerId.text.isEmpty
+                    ? null
+                    : int.parse(_controllerId.text);
+                if (id == null) {
                   showSnackBar("El nombre es obligatorio");
                 } else {
                   setState(() {
                     Post post = Post(
-                      name: name,
+                      id: id,
                     );
-                    print(_controllerName.text);
-                    tour.deleteTours(post).then((respuesta) {
+                    print(_controllerId.text);
+                    tour.deleteTours(id).then((respuesta) {
                       setState(() {
                         if (respuesta.statusCode == 200) {
                           showSnackBar("Tour eliminado");

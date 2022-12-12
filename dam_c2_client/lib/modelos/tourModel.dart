@@ -58,25 +58,25 @@ String datosToJson(Datos data) {
 }
 
 class Post {
-  String name;
+  int id;
 
   Post({
-    this.name,
+    this.id,
   });
 
   factory Post.fromJson(Map<String, dynamic> json) {
     return Post(
-      name: json["name"],
+      id: json["id"],
     );
   }
 
   Map<String, dynamic> toJson() => {
-        "name": name,
+        "id": id,
       };
 
   @override
   String toString() {
-    return 'Datos{name: $name}';
+    return 'Datos{id: $id}';
   }
 }
 

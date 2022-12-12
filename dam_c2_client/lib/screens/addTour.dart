@@ -3,7 +3,6 @@ import '../Providers/tours_provider.dart';
 import 'package:mobile_project/modelos/tourModel.dart';
 
 class AddTour extends StatefulWidget {
-  int id;
   String name;
   String city;
   String description;
@@ -13,8 +12,7 @@ class AddTour extends StatefulWidget {
   bool _isApiProcess = false;
 
   AddTour(
-      {this.id,
-      this.name,
+      {this.name,
       this.city,
       this.description,
       this.price,
@@ -26,7 +24,6 @@ class AddTour extends StatefulWidget {
 
 class _AddTourState extends State<AddTour> {
   TourProvider tour = TourProvider();
-  TextEditingController _controllerId = TextEditingController();
   TextEditingController _controllerName = TextEditingController();
   TextEditingController _controllerCity = TextEditingController();
   TextEditingController _controllerDescription = TextEditingController();
@@ -36,7 +33,6 @@ class _AddTourState extends State<AddTour> {
 
   @override
   void initState() {
-    _controllerId.text = widget.id == null ? "0" : toString();
     _controllerName.text = widget.name;
     _controllerCity.text = widget.city;
     _controllerDescription.text = widget.description;
@@ -72,13 +68,6 @@ class _AddTourState extends State<AddTour> {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: <Widget>[
-                  TextFormField(
-                    controller: _controllerId,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Ingresa el id',
-                    ),
-                  ),
                   SizedBox(
                     height: 10,
                   ),
@@ -143,9 +132,6 @@ class _AddTourState extends State<AddTour> {
                       ? OutlinedButton(
                           child: Text("Agregar"),
                           onPressed: () {
-                            int id = _controllerId.text.toString().isEmpty
-                                ? 0
-                                : int.parse(_controllerId.text.toString());
                             String name =
                                 _controllerName.text.toString().trim();
                             String city =
@@ -190,14 +176,13 @@ class _AddTourState extends State<AddTour> {
                               setState(() {
                                 widget._isApiProcess = true;
                                 Datos datos = Datos(
-                                    id: id,
                                     name: name,
                                     city: city,
                                     description: description,
                                     price: price,
                                     shedule: shedule,
                                     rating: rating);
-                                tour.createTours(datos).then((respuesta) {
+                                tour.addTours(datos).then((respuesta) {
                                   setState(() {
                                     widget._isApiProcess = false;
                                   });
