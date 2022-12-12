@@ -35,7 +35,7 @@ export class ToursController {
   @Post()
   async create(@Body() data: ToursDTO) {
     return {
-      statusCode: HttpStatus.OK,
+      statusCode: HttpStatus.CREATED,
       data: await this.toursService.create(data),
     };
   }
