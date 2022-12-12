@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mobile_project/screens/Login.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -9,8 +10,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   List<IconData> _icons = [
-    FontAwesomeIcons.mountain,
-    FontAwesomeIcons.book,
+    FontAwesomeIcons.powerOff,
+    FontAwesomeIcons.star,
+    FontAwesomeIcons.map,
   ];
 
   Widget _buildIcon(int index) {
@@ -18,11 +20,14 @@ class _HomeScreenState extends State<HomeScreen> {
       onTap: () {
         setState(() {
           _selectedIndex = index;
-          if (_selectedIndex < 1) {
+          if (_selectedIndex < 2) {
             if (_selectedIndex == 0) {
-              Navigator.pushNamed(context, '/Tours');
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()));
             }
-          } else {
+          } else if (_selectedIndex == 1) {
+            Navigator.pushNamed(context, '/Tours');
+          } else if (_selectedIndex == 2) {
             Navigator.pushNamed(context, '/certamen');
           }
         });
@@ -73,6 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: <Widget>[
                 _buildIcon(0),
                 _buildIcon(1),
+                _buildIcon(2),
               ],
             ),
             SizedBox(height: 20.0),

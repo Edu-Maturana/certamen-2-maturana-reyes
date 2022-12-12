@@ -27,6 +27,7 @@ class _DeleteTourState extends State<DeleteTour> {
           style: TextStyle(fontSize: 20),
           textAlign: TextAlign.center,
         ),
+        backgroundColor: Colors.red,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new),
           onPressed: () {
@@ -76,6 +77,13 @@ class _DeleteTourState extends State<DeleteTour> {
                 }
               },
               child: Text('Eliminar'),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.red,
+                onPrimary: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(32.0),
+                ),
+              ),
             ),
           ],
         ),

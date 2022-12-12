@@ -1,7 +1,8 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:mobile_project/Providers/tours_provider.dart';
-import 'package:mobile_project/screens/searchTour.dart';
+
+import 'Login.dart';
 
 class CertamenTourPage extends StatefulWidget {
   @override
@@ -29,6 +30,24 @@ class _CertamenTourPageState extends State<CertamenTourPage> {
                 'C3 DAM020-CLIENTE',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
+              actions: [
+                PopupMenuButton(
+                  itemBuilder: (context) => [
+                    PopupMenuItem(
+                      value: 'logout',
+                      child: Text('Cerrar sesión'),
+                    )
+                  ],
+                  onSelected: (opcion) {
+                    if (opcion == 'logout') {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()));
+                    }
+                  },
+                )
+              ],
             ),
             Expanded(
               child: FutureBuilder(
@@ -52,15 +71,21 @@ class _CertamenTourPageState extends State<CertamenTourPage> {
                         return ListTile(
                           title: Text(snapshot.data['data'][index]['name'] +
                               ' - ' +
-                              snapshot.data['data'][index]['city']),
+                              snapshot.data['data'][index]['city'] +
+                              '\n Id tour: ' +
+                              '${snapshot.data['data'][index]['id']}'),
                           subtitle:
                               Text(snapshot.data['data'][index]['description']),
+                          leading: Image.network(
+                              snapshot.data['data'][index]['img']),
                           trailing: Text(
                               '${snapshot.data['data'][index]['price']} CLP' +
-                                  ' - ' +
+                                  '\n Horario: ' +
                                   '${snapshot.data['data'][index]['schedule']}' +
-                                  ' - ' +
-                                  '${snapshot.data['data'][index]['rating']}'),
+                                  ' \n Valoración: ' +
+                                  '${snapshot.data['data'][index]['rating']}' +
+                                  ' ' +
+                                  '⭐'),
                         );
                       },
                     );
@@ -102,22 +127,6 @@ class _CertamenTourPageState extends State<CertamenTourPage> {
                 ),
                 SizedBox(
                   width: 10,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return buscarTour(
-                        name: 'name',
-                        city: 'city',
-                        description: 'description',
-                        price: 0,
-                        shedule: 'shedule',
-                        rating: 0,
-                      );
-                    }));
-                  },
-                  child: Text('Buscar'),
                 ),
               ],
             ),

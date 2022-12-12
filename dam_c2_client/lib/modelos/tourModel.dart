@@ -5,8 +5,9 @@ class Datos {
   String name;
   String city;
   String description;
+  String img;
   int price;
-  String shedule;
+  String schedule;
   int rating;
 
   Datos({
@@ -14,8 +15,9 @@ class Datos {
     this.name,
     this.city,
     this.description,
+    this.img,
     this.price,
-    this.shedule,
+    this.schedule,
     this.rating,
   });
 
@@ -25,8 +27,9 @@ class Datos {
       name: json["name"],
       city: json["city"],
       description: json["description"],
+      img: json["img"],
       price: json["price"],
-      shedule: json["shedule"],
+      schedule: json["schedule"],
       rating: json["rating"],
     );
   }
@@ -36,14 +39,15 @@ class Datos {
         "name": name,
         "city": city,
         "description": description,
+        "img": img,
         "price": price,
-        "shedule": shedule,
+        "schedule": schedule,
         "rating": rating,
       };
 
   @override
   String toString() {
-    return 'Datos{id: $id, name: $name, city: $city, description: $description, price: $price, shedule: $shedule, rating: $rating}';
+    return 'Datos{id: $id, name: $name, city: $city, description: $description, img: $img, price: $price, schedule: $schedule, rating: $rating}';
   }
 }
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_project/screens/Login.dart';
 import 'package:mobile_project/screens/ProductsScreen.dart';
-import 'package:mobile_project/screens/searchTour.dart';
 import 'package:mobile_project/screens/certamen.dart';
 import 'package:mobile_project/screens/addTour.dart';
 import 'package:mobile_project/screens/home_screen.dart';
@@ -21,14 +20,13 @@ class MyApp extends StatelessWidget {
         accentColor: Color(0xFFD8ECF1),
         scaffoldBackgroundColor: Color(0xFFF3F5F7),
       ),
-      home: HomeScreen(),
+      home: LoginScreen(),
       initialRoute: '/',
       routes: {
-        '/Tours': (context) => TabsTourPage(),
+        '/Tours': (context) => favoritePage(),
         '/certamen': (context) => CertamenTourPage(),
         '/Add': (context) => AddTour(),
         '/Delete': (context) => DeleteTour(),
-        '/Search': (context) => buscarTour(),
       },
     );
   }

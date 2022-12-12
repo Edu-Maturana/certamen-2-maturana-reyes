@@ -6,8 +6,9 @@ class AddTour extends StatefulWidget {
   String name;
   String city;
   String description;
+  String img;
   int price;
-  String shedule;
+  String schedule;
   int rating;
   bool _isApiProcess = false;
 
@@ -15,8 +16,9 @@ class AddTour extends StatefulWidget {
       {this.name,
       this.city,
       this.description,
+      this.img,
       this.price,
-      this.shedule,
+      this.schedule,
       this.rating});
   @override
   _AddTourState createState() => _AddTourState();
@@ -27,8 +29,9 @@ class _AddTourState extends State<AddTour> {
   TextEditingController _controllerName = TextEditingController();
   TextEditingController _controllerCity = TextEditingController();
   TextEditingController _controllerDescription = TextEditingController();
+  TextEditingController _controllerImg = TextEditingController();
   TextEditingController _controllerPrice = TextEditingController();
-  TextEditingController _controllerShedule = TextEditingController();
+  TextEditingController _controllerSchedule = TextEditingController();
   TextEditingController _controllerRating = TextEditingController();
 
   @override
@@ -36,8 +39,9 @@ class _AddTourState extends State<AddTour> {
     _controllerName.text = widget.name;
     _controllerCity.text = widget.city;
     _controllerDescription.text = widget.description;
-    _controllerPrice.text = widget.price.toString();
-    _controllerShedule.text = widget.shedule;
+    _controllerImg.text = widget.img;
+    _controllerPrice.text = widget.price == null ? "0" : toString();
+    _controllerSchedule.text = widget.schedule;
     _controllerRating.text = widget.rating == null ? "0" : toString();
     super.initState();
   }
@@ -48,6 +52,7 @@ class _AddTourState extends State<AddTour> {
       appBar: AppBar(
         title: Text('Agregar Tour',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+        backgroundColor: Colors.red,
       ),
       body: SafeArea(
         child: Stack(
@@ -102,6 +107,16 @@ class _AddTourState extends State<AddTour> {
                     height: 10,
                   ),
                   TextFormField(
+                    controller: _controllerImg,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Ingresa la imagen',
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
                     controller: _controllerPrice,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
@@ -112,7 +127,7 @@ class _AddTourState extends State<AddTour> {
                     height: 10,
                   ),
                   TextFormField(
-                    controller: _controllerShedule,
+                    controller: _controllerSchedule,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Ingresa el horario',
@@ -131,6 +146,13 @@ class _AddTourState extends State<AddTour> {
                   widget.name == null
                       ? OutlinedButton(
                           child: Text("Agregar"),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.red,
+                            onPrimary: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(32.0),
+                            ),
+                          ),
                           onPressed: () {
                             String name =
                                 _controllerName.text.toString().trim();
@@ -138,11 +160,12 @@ class _AddTourState extends State<AddTour> {
                                 _controllerCity.text.toString().trim();
                             String description =
                                 _controllerDescription.text.toString().trim();
+                            String img = _controllerImg.text.toString().trim();
                             int price = _controllerPrice.text.toString().isEmpty
                                 ? 0
                                 : int.parse(_controllerPrice.text.toString());
-                            String shedule =
-                                _controllerShedule.text.toString().trim();
+                            String schedule =
+                                _controllerSchedule.text.toString().trim();
                             int rating = _controllerRating.text
                                     .toString()
                                     .isEmpty
@@ -161,7 +184,11 @@ class _AddTourState extends State<AddTour> {
                               showSnackBar("Ingresa la descripción");
                               return;
                             }
-                            if (shedule.isEmpty) {
+                            if (img.isEmpty) {
+                              showSnackBar("Ingresa la imagen");
+                              return;
+                            }
+                            if (schedule.isEmpty) {
                               showSnackBar("Ingresa el horario");
                               return;
                             }
@@ -179,8 +206,9 @@ class _AddTourState extends State<AddTour> {
                                     name: name,
                                     city: city,
                                     description: description,
+                                    img: img,
                                     price: price,
-                                    shedule: shedule,
+                                    schedule: schedule,
                                     rating: rating);
                                 tour.addTours(datos).then((respuesta) {
                                   setState(() {
@@ -190,7 +218,8 @@ class _AddTourState extends State<AddTour> {
                                     showSnackBar("Tour agregado correctamente");
                                     Navigator.pop(context, true);
                                   } else {
-                                    showSnackBar("Error al agregar el tour");
+                                    showSnackBar("Error al agregar el tour" +
+                                        respuesta.body);
                                   }
                                 });
                               });
