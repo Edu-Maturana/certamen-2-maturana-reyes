@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart' as http;
-import 'package:mobile_project/modelos/carModel.dart';
+import 'package:mobile_project/modelos/tourModel.dart';
 
 class TourProvider {
   final apiURL = 'http://10.0.2.2:3000/tours';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_project/modelos/carModel.dart';
+import 'package:mobile_project/modelos/tourModel.dart';
 import '../Providers/tours_provider.dart';
 
 class DeleteTour extends StatefulWidget {

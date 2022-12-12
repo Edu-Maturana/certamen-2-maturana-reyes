@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_project/screens/ProductsScreen.dart';
-import 'package:mobile_project/screens/buscarCar.dart';
+import 'package:mobile_project/screens/searchTour.dart';
 import 'package:mobile_project/screens/certamen.dart';
-import 'package:mobile_project/screens/addCar.dart';
+import 'package:mobile_project/screens/addTour.dart';
 import 'package:mobile_project/screens/home_screen.dart';
-import 'package:mobile_project/screens/deleteCar.dart';
+import 'package:mobile_project/screens/deleteTour.dart';
 
 void main() => runApp(MyApp());
 

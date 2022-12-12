@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Providers/tours_provider.dart';
-import 'package:mobile_project/modelos/carModel.dart';
+import 'package:mobile_project/modelos/tourModel.dart';
 
 class AddTour extends StatefulWidget {
   int id;

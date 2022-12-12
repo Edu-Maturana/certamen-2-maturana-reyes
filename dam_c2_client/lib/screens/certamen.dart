@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:mobile_project/Providers/tours_provider.dart';
-import 'package:mobile_project/screens/buscarCar.dart';
+import 'package:mobile_project/screens/searchTour.dart';
 
 class CertamenTourPage extends StatefulWidget {
   @override
