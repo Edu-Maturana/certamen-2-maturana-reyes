@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart' as http;
-import 'package:mobile_project/modelos/carModel.dart';
+import 'package:mobile_project/modelos/tourModel.dart';
 
 class TourProvider {
   final apiURL = 'http://10.0.2.2:3000/tours';
@@ -15,33 +15,24 @@ class TourProvider {
       return [];
     }
   }
-}
 
-class ProviderAutos {
-  final apiURL = 'http://10.0.2.2:3000/cars';
-
-  Future getAutos() async {
-    var url = Uri.parse(apiURL);
-    var respuesta = await http.get(url);
-    if (respuesta.statusCode == 200) {
-      return json.decode(respuesta.body);
-    } else {
-      return [];
-    }
-  }
-
-  Future<http.Response> createAutos(Datos datos) async {
+  Future<http.Response> addTours(Datos tour) async {
     var url = Uri.parse(apiURL);
     var respuesta = await http.post(url,
-        headers: {"content-type": "application/json"},
-        body: datosToJson(datos));
+        headers: {"Content-Type": "application/json"},
+        body: json.encode(tour.toJson()));
     return respuesta;
   }
 
-  Future<http.Response> deleteAutos(Post post) async {
-    //BORRAR UN AUTO POR VIN
-    var url = Uri.parse(apiURL + '/' + post.vin);
+  Future<http.Response> deleteTours(int id) async {
+    var url = Uri.parse(apiURL + '/' + id.toString());
     var respuesta = await http.delete(url);
+    return respuesta;
+  }
+
+  Future getTour(int id) async {
+    var url = Uri.parse(apiURL + '/' + id.toString());
+    var respuesta = await http.get(url);
     return respuesta;
   }
 }

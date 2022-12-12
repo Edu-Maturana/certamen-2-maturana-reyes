@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_project/screens/Login.dart';
 import 'package:mobile_project/screens/ProductsScreen.dart';
 import 'package:mobile_project/screens/certamen.dart';
-import 'package:mobile_project/screens/addCar.dart';
+import 'package:mobile_project/screens/addTour.dart';
 import 'package:mobile_project/screens/home_screen.dart';
-import 'package:mobile_project/screens/deleteCar.dart';
+import 'package:mobile_project/screens/deleteTour.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,13 +20,13 @@ class MyApp extends StatelessWidget {
         accentColor: Color(0xFFD8ECF1),
         scaffoldBackgroundColor: Color(0xFFF3F5F7),
       ),
-      home: HomeScreen(),
+      home: LoginScreen(),
       initialRoute: '/',
       routes: {
-        '/Tours': (context) => TabsTourPage(),
-        '/certamen': (context) => CertamenAutosPage(),
-        '/Add': (context) => AddAuto(),
-        '/Delete': (context) => DeleteAuto(),
+        '/Tours': (context) => favoritePage(),
+        '/certamen': (context) => CertamenTourPage(),
+        '/Add': (context) => AddTour(),
+        '/Delete': (context) => DeleteTour(),
       },
     );
   }

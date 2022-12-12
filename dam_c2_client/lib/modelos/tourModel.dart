@@ -1,41 +1,53 @@
 import 'dart:convert';
 
 class Datos {
-  String vin;
-  String brand;
-  String model;
-  int year;
+  int id;
+  String name;
+  String city;
+  String description;
+  String img;
   int price;
+  String schedule;
+  int rating;
 
   Datos({
-    this.vin,
-    this.brand,
-    this.model,
-    this.year,
+    this.id,
+    this.name,
+    this.city,
+    this.description,
+    this.img,
     this.price,
+    this.schedule,
+    this.rating,
   });
 
   factory Datos.fromJson(Map<String, dynamic> json) {
     return Datos(
-      vin: json["vin"],
-      brand: json["brand"],
-      model: json["model"],
-      year: json["year"],
+      id: json["id"],
+      name: json["name"],
+      city: json["city"],
+      description: json["description"],
+      img: json["img"],
       price: json["price"],
+      schedule: json["schedule"],
+      rating: json["rating"],
     );
   }
 
   Map<String, dynamic> toJson() => {
-        "vin": vin,
-        "brand": brand,
-        "model": model,
-        "year": year,
+        "id": id,
+        "name": name,
+        "city": city,
+        "description": description,
+        "img": img,
         "price": price,
+        "schedule": schedule,
+        "rating": rating,
       };
 
   @override
   String toString() {
-    return 'Datos{vin: $vin, brand: $brand, model: $model, year: $year, price: $price}';
+    return 'Datos{id: $id, name: $name, city: $city, description: $description, img: $img, price: $price, schedule: $schedule, rating: $rating}';
   }
 }
 
@@ -50,25 +62,25 @@ String datosToJson(Datos data) {
 }
 
 class Post {
-  String vin;
+  int id;
 
   Post({
-    this.vin,
+    this.id,
   });
 
   factory Post.fromJson(Map<String, dynamic> json) {
     return Post(
-      vin: json["vin"],
+      id: json["id"],
     );
   }
 
   Map<String, dynamic> toJson() => {
-        "vin": vin,
+        "id": id,
       };
 
   @override
   String toString() {
-    return 'Datos{vin: $vin}';
+    return 'Datos{id: $id}';
   }
 }
 

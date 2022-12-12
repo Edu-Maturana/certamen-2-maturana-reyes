@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import '../widgets/destino.dart';
+import 'package:mobile_project/screens/Login.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -11,8 +10,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   List<IconData> _icons = [
-    FontAwesomeIcons.mountain,
-    FontAwesomeIcons.book,
+    FontAwesomeIcons.powerOff,
+    FontAwesomeIcons.map,
   ];
 
   Widget _buildIcon(int index) {
@@ -20,12 +19,13 @@ class _HomeScreenState extends State<HomeScreen> {
       onTap: () {
         setState(() {
           _selectedIndex = index;
-          if (_selectedIndex < 1) {
+          if (_selectedIndex < 2) {
             if (_selectedIndex == 0) {
-              Navigator.pushNamed(context, '/Tours');
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()));
+            } else if (_selectedIndex == 1) {
+              Navigator.pushNamed(context, '/certamen');
             }
-          } else {
-            Navigator.pushNamed(context, '/certamen');
           }
         });
       },
@@ -77,8 +77,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 _buildIcon(1),
               ],
             ),
-            SizedBox(height: 20.0),
-            //widgetDestino(),
+            SizedBox(height: 100.0),
+            Container(
+              height: 200.0,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(30.0),
+                child: Image(
+                  image: AssetImage('assets/images/LogoOficial.png'),
+                  fit: 3 == 0 ? BoxFit.cover : BoxFit.contain,
+                ),
+              ),
+            )
           ],
         ),
       ),
