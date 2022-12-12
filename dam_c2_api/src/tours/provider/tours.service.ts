@@ -13,7 +13,11 @@ export class ToursService {
   ) {}
 
   async getAll() {
-    return await this.toursRepository.find();
+    return await this.toursRepository.find({
+      order: {
+        id: 'DESC',
+      },
+    });
   }
 
   async getOne(id: number) {
