@@ -1,7 +1,8 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:mobile_project/Providers/tours_provider.dart';
-import 'package:mobile_project/screens/searchTour.dart';
+import 'package:flushbar/flushbar.dart';
+import 'Login.dart';
 
 class CertamenTourPage extends StatefulWidget {
   @override
@@ -29,6 +30,24 @@ class _CertamenTourPageState extends State<CertamenTourPage> {
                 'C3 DAM020-CLIENTE',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
+              actions: [
+                PopupMenuButton(
+                  itemBuilder: (context) => [
+                    PopupMenuItem(
+                      value: 'logout',
+                      child: Text('Cerrar sesión'),
+                    )
+                  ],
+                  onSelected: (opcion) {
+                    if (opcion == 'logout') {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()));
+                    }
+                  },
+                )
+              ],
             ),
             Expanded(
               child: FutureBuilder(
@@ -49,18 +68,38 @@ class _CertamenTourPageState extends State<CertamenTourPage> {
                     return ListView.builder(
                       itemCount: snapshot.data['data'].length,
                       itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text(snapshot.data['data'][index]['name'] +
-                              ' - ' +
-                              snapshot.data['data'][index]['city']),
-                          subtitle:
-                              Text(snapshot.data['data'][index]['description']),
-                          trailing: Text(
-                              '${snapshot.data['data'][index]['price']} CLP' +
-                                  ' - ' +
-                                  '${snapshot.data['data'][index]['schedule']}' +
-                                  ' - ' +
-                                  '${snapshot.data['data'][index]['rating']}'),
+                        return Container(
+                          margin: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(
+                                color: Color.fromARGB(255, 104, 105, 103),
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          child: ListTile(
+                            title: Text(snapshot.data['data'][index]['name'] +
+                                ' - ' +
+                                snapshot.data['data'][index]['city'] +
+                                '\n Id: ' +
+                                '${snapshot.data['data'][index]['id']}'),
+                            leading: Image.network(
+                                snapshot.data['data'][index]['img']),
+                            trailing: Text(
+                                '${snapshot.data['data'][index]['price']} CLP' +
+                                    '\n Horario: ' +
+                                    '${snapshot.data['data'][index]['schedule']}' +
+                                    ' \n Valoración: ' +
+                                    '${snapshot.data['data'][index]['rating']}' +
+                                    ' ' +
+                                    '⭐'),
+                            onLongPress: () {
+                              (MessageWidget.info(
+                                  context,
+                                  snapshot.data['data'][index]['description'],
+                                  6));
+                            },
+                          ),
                         );
                       },
                     );
@@ -103,27 +142,28 @@ class _CertamenTourPageState extends State<CertamenTourPage> {
                 SizedBox(
                   width: 10,
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return buscarTour(
-                        name: 'name',
-                        city: 'city',
-                        description: 'description',
-                        price: 0,
-                        shedule: 'shedule',
-                        rating: 0,
-                      );
-                    }));
-                  },
-                  child: Text('Buscar'),
-                ),
               ],
             ),
           ],
         ),
       ),
     );
+  }
+}
+
+class MessageWidget {
+  TourProvider tour = TourProvider();
+  static void info(BuildContext context, String message, int seconds) {
+    Flushbar(
+      title: 'Descripción',
+      message: message,
+      icon: Icon(
+        Icons.info_outline,
+        size: 28,
+        color: Colors.blue.shade300,
+      ),
+      leftBarIndicatorColor: Colors.blue.shade300,
+      duration: Duration(seconds: seconds),
+    )..show(context);
   }
 }

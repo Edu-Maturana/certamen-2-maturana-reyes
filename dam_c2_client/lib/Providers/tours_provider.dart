@@ -19,17 +19,8 @@ class TourProvider {
   Future<http.Response> addTours(Datos tour) async {
     var url = Uri.parse(apiURL);
     var respuesta = await http.post(url,
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(<String, dynamic>{
-          'name': tour.name,
-          'city': tour.city,
-          'description': tour.description,
-          'price': tour.price,
-          'shedule': tour.shedule,
-          'rating': tour.rating,
-        }));
+        headers: {"Content-Type": "application/json"},
+        body: json.encode(tour.toJson()));
     return respuesta;
   }
 
